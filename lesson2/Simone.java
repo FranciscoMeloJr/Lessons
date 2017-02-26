@@ -39,31 +39,60 @@ public class Simone {
 		char choice = sc.next().charAt(0);
 		while (choice == 'y') {
 			participants++;
-			System.out.println("The gender?: ");
+			System.out.println("The gender? ");
 			char Gender = sc.next().charAt(0);
-			if (Gender == 'm') {
+			if (Gender == 'm' || Gender == 'M') {
 				male++;
 			}
-			System.out.println("What is the age group?: ");
-			int AgeGroup = sc.nextInt();
-
-			System.out.println("What is the season wanted?: ");
-			int seasonGroup = sc.nextInt();
-
-			System.out.println("What is the prefered color?: ");
-			int prefColor = sc.nextInt();
-
-			System.out.println("Want to enter information? y or n : ");
-			choice = sc.next().charAt(0);
-			putinfo(participants, Gender, AgeGroup, seasonGroup, prefColor);
+			if (validateGender(Gender)) {
+				System.out.println("What is the age group?: ");
+				int AgeGroup = sc.nextInt();
+				if (validateAge(AgeGroup)) {
+					System.out.println("What is the season wanted?: ");
+					int seasonGroup = sc.nextInt();
+					if (validateSeason(seasonGroup)) {
+						System.out.println("What is the prefered color?: ");
+						int prefColor = sc.nextInt();
+						if (validateColor(prefColor)) {
+							System.out.println("Want to enter information? y or n : ");
+							choice = sc.next().charAt(0);
+							putinfo(participants, Gender, AgeGroup, seasonGroup, prefColor);
+						}
+					}
+				}
+			}
 		}
 		showStatistics();
+	}
+
+	private static boolean validateAge(int AgeGroup) {
+		if (AgeGroup < 1 || AgeGroup > 5)
+			return false;
+		return true;
+	}
+
+	private static boolean validateSeason(int seasonGroup) {
+		if (seasonGroup < 1 || seasonGroup > 4)
+			return false;
+		return true;
+	}
+
+	private static boolean validateColor(int prefColor) {
+		if (prefColor < 1 || prefColor > 3)
+			return false;
+		return true;
+	}
+
+	private static boolean validateGender(char Gender) {
+		if (Gender == 'f' || Gender == 'F' || Gender == 'm' || Gender == 'M')
+			return true;
+		return false;
 	}
 
 	private static void putinfo(int id, char gender, int AgeGroup, int seasonGroup, int prefColor) {
 		AgeGroup--;
 		seasonGroup--;
-		
+
 		if (gender == 'm') {
 			arrayGroupMale[AgeGroup]++;
 			arraySeasonMale[seasonGroup]++;
@@ -75,8 +104,7 @@ public class Simone {
 		}
 		// para cada grupo de idade, porcentagem de pessoas que ecolheram cada
 		// estação e porcentagem que escolheram cada cor.
-		
-		
+
 		if (prefColor == 1) {
 			arrayAgeGroupColor1[AgeGroup]++;
 		}
