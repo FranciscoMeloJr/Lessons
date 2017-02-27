@@ -8,15 +8,33 @@ import java.util.Random;
 
 import tp6305.CoverageTest;
 
+/**
+ * This class does the Search Based Test:
+ *
+ */
 public class SearchBasedTest extends CoverageTest {
 	
-	private FitnessFunction ff = new FitnessFunction();
+	//Variables to make the tests easy:
+	static boolean[] arrayRes = new boolean[]{true, false};
+	static Operators[] arrayOpt = new Operators[]{Operators.less, Operators.greater, Operators.equal};
+	static Variables[] arrayVariables = new Variables[]{Variables.Vars1, Variables.Vars2, Variables.Vars3,Variables.zero, Variables.first, Variables.second, Variables.third, Variables.Vartrian, Variables.Vars1s2, Variables.Vars2s3, Variables.Vars1s3};
+	
+	//Fitness function:
+	private FitnessFunction fit = new FitnessFunction();
 	public List<List<Condition>> ExePath = new ArrayList<List<Condition>>();
 	private int iterationExePath = 0;
 	
 	//To accumulate the branches:
 	private List<String> branches = new ArrayList<String>();
 	
+	/**
+	 * This function generates the test data:
+	 * 
+	 * @param builder
+	 * 
+	 * @param testData
+	 *
+	 */
 	protected void generateTestData(StringBuilder builder, float[] testData) {
 		Random rand = new Random();
 		int maxRand = 1000;
@@ -27,84 +45,84 @@ public class SearchBasedTest extends CoverageTest {
 		int triang = 0;
 		ExePath.clear();
 		startBranches();
-		List<Condition> ExePathActuel = ExePath.get(iterationExePath);
-		for (int i = 0; i < ExePathActuel.size(); i++) {
-			int ffEval = 0;
-			Condition condition = ExePathActuel.get(i);
+		List<Condition> currentPath = ExePath.get(iterationExePath);
+		for (int i = 0; i < currentPath.size(); i++) {
+			int Total = 0;
+			Condition condition = currentPath.get(i);
 			int a = 0;
 			int b = 0;
 			a = calculateA(condition, testData);
 			
 			b = calculateB(condition, testData);
 			
-			if (ff.evaluateCondition(condition.op,condition.result,a,b) != 0) {
-				ffEval = ff.evaluateCondition(condition.op,condition.result,a,b);
-				if (condition.left == Variables.Vars1 && condition.right == Variables.zero) {
-					testData[0] -= ffEval;
+			if (fit.evaluateCondition(condition.op,condition.result,a,b) != 0) {
+				Total = fit.evaluateCondition(condition.op,condition.result,a,b);
+				if (condition.left == arrayVariables[0] && condition.right == arrayVariables[3]) {
+					testData[0] -= Total;
 				}
-				if (condition.left == Variables.Vars2 && condition.right == Variables.zero) {
-					testData[1] -= ffEval;
+				if (condition.left == arrayVariables[1] && condition.right == arrayVariables[3]) {
+					testData[1] -= Total;
 				}
-				if (condition.left == Variables.Vars3 && condition.right == Variables.zero) {
-					testData[2] -= ffEval;
+				if (condition.left == arrayVariables[2] && condition.right == arrayVariables[3]) {
+					testData[2] -= Total;
 				}
-				if (condition.left == Variables.Vars1 && condition.right == Variables.Vars2) {
+				if (condition.left == arrayVariables[0] && condition.right == arrayVariables[1]) {
 					if (testData[0] < testData[1]) {
-						testData[0] += ffEval;
+						testData[0] += Total;
 					}
 					else {
-						testData[1] += ffEval;
+						testData[1] += Total;
 					}
 				}
-				if (condition.left == Variables.Vars1 && condition.right == Variables.Vars3) {
+				if (condition.left == arrayVariables[0] && condition.right == arrayVariables[2]) {
 					if (testData[0] < testData[2]) {
-						testData[0] += ffEval;
+						testData[0] += Total;
 					}
 					else {
-						testData[2] += ffEval;
+						testData[2] += Total;
 					}
 				}
-				if (condition.left == Variables.Vars2 && condition.right == Variables.Vars3) {
+				if (condition.left == arrayVariables[1] && condition.right == arrayVariables[2]) {
 					if (testData[1] < testData[2]) {
-						testData[1] += ffEval;
+						testData[1] += Total;
 					}
 					else {
-						testData[2] += ffEval;
+						testData[2] += Total;
 					}
 				}
 				
-				if (condition.left == Variables.Vars1s2) {
-					if ((condition.op == Operators.greater && condition.result==true)|| (condition.op == Operators.greater && condition.result==false)) {
-						testData[2] += ffEval;
+				if (condition.left == arrayVariables[7]) {
+					if ((condition.op == arrayOpt[1] && condition.result== arrayRes[0])|| (condition.op == arrayOpt[1] && condition.result==arrayRes[1] )) {
+						testData[2] += Total;
 					}
-					if ((condition.op == Operators.greater && condition.result==true)|| (condition.op == Operators.greater && condition.result==false)) {
-						testData[2] -= ffEval;
-					}
-				}
-				if (condition.left == Variables.Vars2s3) {
-					if ((condition.op == Operators.greater && condition.result==true)|| (condition.op == Operators.greater && condition.result==false)) {
-						testData[0] += ffEval;
-					}
-					if ((condition.op == Operators.greater && condition.result==true)|| (condition.op == Operators.greater && condition.result==false)) {
-						testData[0] -= ffEval;
+					if ((condition.op == arrayOpt[1] && condition.result== arrayRes[0] )|| (condition.op == arrayOpt[1] && condition.result==arrayRes[1])) {
+						testData[2] -= Total;
 					}
 				}
-				if (condition.left == Variables.Vars1s3) {
-					if ((condition.op == Operators.greater && condition.result==true)|| (condition.op == Operators.greater && condition.result==false)) {
-						testData[1] += ffEval;
+				if (condition.left == arrayVariables[8]) {
+					if ((condition.op == arrayOpt[1] && condition.result==arrayRes[0] )|| (condition.op == arrayOpt[1] && condition.result==arrayRes[1])) {
+						testData[0] += Total;
 					}
-					if ((condition.op == Operators.greater && condition.result==true)|| (condition.op == Operators.greater && condition.result==false)) {
-						testData[1] -= ffEval;
+					if ((condition.op == arrayOpt[1] && condition.result==arrayRes[0] )|| (condition.op == arrayOpt[1] && condition.result==arrayRes[1])) {
+						testData[0] -= Total;
+					}
+				}
+				if (condition.left == arrayVariables[9]) {
+					if ((condition.op ==arrayOpt[1] && condition.result==arrayRes[0] )|| (condition.op == arrayOpt[1] && condition.result==arrayRes[1])) {
+						testData[1] += Total;
+					}
+					if ((condition.op == arrayOpt[1] && condition.result==arrayRes[0] )|| (condition.op == arrayOpt[1] && condition.result==arrayRes[1])) {
+						testData[1] -= Total;
 					}
 				}
 			}
-			if (condition.op==Operators.equal && condition.left==Variables.Vars1 && condition.right==Variables.Vars2 && condition.result == true) {
+			if (condition.op==arrayOpt[2] && condition.left==arrayVariables[0] && condition.right==arrayVariables[1] && condition.result == arrayRes[0] ) {
 				triang = triang+1;
 			}
-			if (condition.op==Operators.equal && condition.left==Variables.Vars2 && condition.right==Variables.Vars3 && condition.result == true) {
+			if (condition.op==arrayOpt[2] && condition.left==arrayVariables[0]&& condition.right==arrayVariables[2] && condition.result == arrayRes[0] ) {
 				triang = triang+2;
 			}
-			if (condition.op==Operators.equal && condition.left==Variables.Vars1 && condition.right==Variables.Vars3 && condition.result == true) {
+			if (condition.op==arrayOpt[2] && condition.left==arrayVariables[0] && condition.right==arrayVariables[2] && condition.result == arrayRes[0] ) {
 				triang = triang+3;
 			}
 		}
@@ -120,25 +138,25 @@ public class SearchBasedTest extends CoverageTest {
 	
 	private int calculateB(Condition condition, float[] testData) {
 		int b = 0;
-		if (condition.right == Variables.Vars1) {
+		if (condition.right == arrayVariables[0]) {
 			b = (int) testData[0];
 		}
-		if (condition.right == Variables.Vars1) {
+		if (condition.right == arrayVariables[1]) {
 			b = (int) testData[1];
 		}
-		if (condition.right == Variables.Vars3) {
+		if (condition.right == arrayVariables[2]) {
 			b = (int) testData[2];
 		}
-		if (condition.right == Variables.zero) {
+		if (condition.right == arrayVariables[3]) {
 			b = 0;
 		}
-		if (condition.right == Variables.first) {
+		if (condition.right == arrayVariables[4]) {
 			b = 1;
 		}
-		if (condition.right == Variables.second) {
+		if (condition.right == arrayVariables[5]) {
 			b = 2;
 		}
-		if (condition.right == Variables.third) {
+		if (condition.right == arrayVariables[6]) {
 			b = 3;
 		}
 		return b;
@@ -147,25 +165,25 @@ public class SearchBasedTest extends CoverageTest {
 	private int calculateA(Condition condition, float[] testData) {
 		int triang = 0;
 		int a = 0;
-		if (condition.left == Variables.Vars1) {
+		if (condition.left == arrayVariables[0]) {
 			a = (int) testData[0];
 		}
-		if (condition.left == Variables.Vars2) {
+		if (condition.left == arrayVariables[1]) {
 			a = (int) testData[1];
 		}
-		if (condition.left == Variables.Vars3) {
+		if (condition.left == arrayVariables[2]) {
 			a = (int) testData[2];
 		}
-		if (condition.left == Variables.Vartrian) {
+		if (condition.left == arrayVariables[6]) {
 			a = (int) triang;
 		}
-		if (condition.left == Variables.Vars1s2) {
+		if (condition.left == arrayVariables[7]) {
 			a = (int) (testData[0] + testData[1]);
 		}
-		if (condition.left == Variables.Vars2s3) {
+		if (condition.left == arrayVariables[8]) {
 			a = (int) (testData[1] + testData[2]);
 		}
-		if (condition.left == Variables.Vars1s3) {
+		if (condition.left == arrayVariables[9]) {
 			a = (int) (testData[0] + testData[2]);
 		}
 		return a;
@@ -215,12 +233,15 @@ public class SearchBasedTest extends CoverageTest {
 		return 0;
 	}
 	
+	/**
+	 * Function to start the branches:
+	 * 
+	 */
+	
 	public void startBranches() {
 		//boolean[] arrayRes = new boolean[]{true, false};
 		//Operators[] arrayOpt = new Operators[]{Operators.less, Operators.greater, Operators.equal};
 		//Variables[] arrayVariables = new Variables[]{Variables.Vars1, Variables.Vars2, Variables.Vars3,Variables.first, Variables.second, Variables.third, Variables.Vartrian, Variables.Vars1s2, Variables.Vars2s3, Variables.Vars1s3} ;
-		
-		List<Condition> branches = new ArrayList<Condition>();
 
 		// Path 1
 		ExePath.add(createPath1());
