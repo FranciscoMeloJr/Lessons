@@ -49,122 +49,133 @@ public class SearchBasedTest extends CoverageTest {
 		startBranches();
 		List<Condition> currentPath = ExePath.get(iterationExePath);
 		for (int i = 0; i < currentPath.size(); i++) {
-			int Total = 0;
-			Condition condition = currentPath.get(i);
-			int a = 0;
-			int b = 0;
-			a = calculateA(condition, testData);
+			testData = calculateTestDataByCondition(currentPath.get(i), testData, triang);
 
-			b = calculateB(condition, testData);
-
-			if (fit.evaluateCondition(condition.op, condition.result, a, b) != 0) {
-				Total = fit.evaluateCondition(condition.op, condition.result, a, b);
-				if (condition.left == arrayVariables[0] && condition.right == arrayVariables[3]) {
-					testData[0] -= Total;
-				}
-				if (condition.left == arrayVariables[1] && condition.right == arrayVariables[3]) {
-					testData[1] -= Total;
-				}
-				if (condition.left == arrayVariables[2] && condition.right == arrayVariables[3]) {
-					testData[2] -= Total;
-				}
-				if (condition.left == arrayVariables[0] && condition.right == arrayVariables[1]) {
-					if (testData[0] < testData[1]) {
-						testData[0] += Total;
-					} else {
-						testData[1] += Total;
-					}
-				}
-				if (condition.left == arrayVariables[0] && condition.right == arrayVariables[2]) {
-					if (testData[0] < testData[2]) {
-						testData[0] += Total;
-					} else {
-						testData[2] += Total;
-					}
-				}
-				if (condition.left == arrayVariables[1] && condition.right == arrayVariables[2]) {
-					if (testData[1] < testData[2]) {
-						testData[1] += Total;
-					} else {
-						testData[2] += Total;
-					}
-				}
-
-				if (condition.left == arrayVariables[7]) {
-					if ((condition.op == arrayOpt[1] && condition.result == arrayRes[0])
-							|| (condition.op == arrayOpt[1] && condition.result == arrayRes[1])) {
-						testData[2] += Total;
-					}
-					if ((condition.op == arrayOpt[1] && condition.result == arrayRes[0])
-							|| (condition.op == arrayOpt[1] && condition.result == arrayRes[1])) {
-						testData[2] -= Total;
-					}
-				}
-				if (condition.left == arrayVariables[8]) {
-					if ((condition.op == arrayOpt[1] && condition.result == arrayRes[0])
-							|| (condition.op == arrayOpt[1] && condition.result == arrayRes[1])) {
-						testData[0] += Total;
-					}
-					if ((condition.op == arrayOpt[1] && condition.result == arrayRes[0])
-							|| (condition.op == arrayOpt[1] && condition.result == arrayRes[1])) {
-						testData[0] -= Total;
-					}
-				}
-				if (condition.left == arrayVariables[9]) {
-					if ((condition.op == arrayOpt[1] && condition.result == arrayRes[0])
-							|| (condition.op == arrayOpt[1] && condition.result == arrayRes[1])) {
-						testData[1] += Total;
-					}
-					if ((condition.op == arrayOpt[1] && condition.result == arrayRes[0])
-							|| (condition.op == arrayOpt[1] && condition.result == arrayRes[1])) {
-						testData[1] -= Total;
-					}
-				}
-			}
-			if (condition.op == arrayOpt[2] && condition.left == arrayVariables[0]
-					&& condition.right == arrayVariables[1] && condition.result == arrayRes[0]) {
-				triang = triang + 1;
-			}
-			if (condition.op == arrayOpt[2] && condition.left == arrayVariables[0]
-					&& condition.right == arrayVariables[2] && condition.result == arrayRes[0]) {
-				triang = triang + 2;
-			}
-			if (condition.op == arrayOpt[2] && condition.left == arrayVariables[0]
-					&& condition.right == arrayVariables[2] && condition.result == arrayRes[0]) {
-				triang = triang + 3;
-			}
 		}
 		for (int i = 0; i < testData.length; i++) {
 			builder.append(testData[i]).append(", ");
 		}
-		iterationExePath += 1;
-		if (iterationExePath == 14) {
+		iterationExePath++;
+		if (iterationExePath == 14)
 			iterationExePath = 0;
+
+	}
+
+	private float[] calculateTestDataByCondition(Condition condition, float[] testData, int triang) {
+		int Total = 0;
+		//Condition condition = currentPath.get(i);
+		int a = 0;
+		int b = 0;
+		a = calculateA(condition, testData);
+		b = calculateB(condition, testData);
+
+		if (fit.evaluateCondition(condition.op, condition.result, a, b) != 0) {
+			Total = fit.evaluateCondition(condition.op, condition.result, a, b);
+			testData = updateTestData(testData, condition, Total);
+			testData = updateTestData2(testData, condition, Total);
+		}
+		triang = triangFunction(condition, triang);
+		
+		return testData;
+		
+	}
+
+	private int triangFunction(Condition condition, int triang) {
+
+		int x = 0;
+		for (int i = 1; i < 4; i++) {
+			if (i == 1)
+				x = 1;
+			if (i == 2)
+				x = 2;
+			if (i == 3)
+				x = 2;
+			if (condition.op == arrayOpt[2] && condition.left == arrayVariables[0]
+					&& condition.right == arrayVariables[x] && condition.result == arrayRes[0]) {
+				triang = triang + i;
+			}
+		}
+		return triang;
+	}
+
+	private float[] updateTestData2(float[] testData, Condition condition, int Total) {
+
+		int j = 0;
+		for (int i = 7; i < 10; i++) {
+			if (i == 7)
+				j = 2;
+			if (i == 8)
+				j = 0;
+			if (i == 9)
+				j = 1;
+
+			if (condition.left == arrayVariables[i]) {
+				if ((condition.op == arrayOpt[1] && condition.result == arrayRes[0])
+						|| (condition.op == arrayOpt[1] && condition.result == arrayRes[1])) {
+					testData[j] += Total;
+				}
+				if ((condition.op == arrayOpt[1] && condition.result == arrayRes[0])
+						|| (condition.op == arrayOpt[1] && condition.result == arrayRes[1])) {
+					testData[j] -= Total;
+				}
+			}
+		}
+		return testData;
+	}
+
+	private float[] updateTestData(float[] testData, Condition condition, int Total) {
+
+		int max = 4;
+		for (int i = 0; i < max; i++) {
+			if (condition.left == arrayVariables[i] && condition.right == arrayVariables[3]) {
+				testData[i] -= Total;
+			}
 		}
 
+		for (int i = 0; i < 3; i++) {
+			if (condition.left == arrayVariables[0] && condition.right == arrayVariables[i]) {
+				if (testData[0] < testData[i]) {
+					testData[0] += Total;
+				} else {
+					testData[i] += Total;
+				}
+			}
+		}
+
+		int x = 1;
+		int y = 1;
+
+		if (condition.left == arrayVariables[x] && condition.right == arrayVariables[y]) {
+			if (testData[x] < testData[y]) {
+				testData[x] += Total;
+			} else {
+				testData[y] += Total;
+			}
+		}
+		return testData;
 	}
 
 	private int calculateB(Condition condition, float[] testData) {
 		int b = 0;
-		int[] arrayResult = new int[]{(int) testData[0],(int) testData[1], (int) testData[2],0,1,2,3};
-		
-		for(int i = 0; i< 7; i++){
-			if (condition.left == arrayVariables[i]) {
-				b = arrayResult[i];
-			}
+		int[] arrayResult = new int[] { (int) testData[0], (int) testData[1], (int) testData[2], 0, 1, 2, 3 };
+		int max = 7;
+		for (int i = 0; i < max; i++) {
+			b = arrayResult[i];
 		}
+
 		return b;
 	}
 
 	private int calculateA(Condition condition, float[] testData) {
 		int triang = 0;
 		int a = 0;
-		int[] arrayResult = new int[]{(int) testData[0],(int) testData[1], (int) testData[2],(int)triang,(int) (testData[0] + testData[1]),(int) (testData[1] + testData[2]),(int) (testData[0] + testData[2])};
-		Variables[] array = new Variables[] { Variables.Vars1, Variables.Vars2, Variables.Vars3,
-				Variables.third, Variables.Vartrian, Variables.Vars1s2,
-				Variables.Vars2s3, Variables.Vars1s3 };
-		
-		for(int i = 0; i< array.length; i++){
+		int max = 7;
+		int[] arrayResult = new int[] { (int) testData[0], (int) testData[1], (int) testData[2], (int) triang,
+				(int) (testData[0] + testData[1]), (int) (testData[1] + testData[2]),
+				(int) (testData[0] + testData[2]) };
+		Variables[] array = new Variables[] { Variables.Vars1, Variables.Vars2, Variables.Vars3, Variables.third,
+				Variables.Vartrian, Variables.Vars1s2, Variables.Vars2s3, Variables.Vars1s3 };
+		for (int i = 0; i < max; i++) {
 			if (condition.left == array[i]) {
 				a = arrayResult[i];
 			}
@@ -224,21 +235,20 @@ public class SearchBasedTest extends CoverageTest {
 	public void startBranches() {
 
 		// Path 1 to 14:
-		for(int i = 1; i< 15; i++){
+		for (int i = 1; i < 15; i++) {
 			ExePath.add(createPath(i));
 		}
 
 	}
-	
+
 	// Function to create the Paths
 	private List<Condition> createPath(int i) {
 		List<Condition> branches = null;
-		
+
 		branches = Condition.createPath(i);
-		
+
 		return branches;
 	}
-
 
 	/**
 	 * Function to create branch list from an array:
