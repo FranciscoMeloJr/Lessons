@@ -23,7 +23,9 @@ public class SearchBasedTest extends CoverageTest {
 
 	// Fitness function:
 	private FitnessFunction fit = new FitnessFunction();
-	public List<List<Condition>> ExePath = new ArrayList<List<Condition>>();
+	public List<List<Condition>> ExePathcurrent = new ArrayList<List<Condition>>();
+	
+	public ArrayList<ExePath> paths = new ArrayList<ExePath>();
 	private int iterationExePath = 0;
 
 	// To accumulate the branches:
@@ -38,20 +40,23 @@ public class SearchBasedTest extends CoverageTest {
 	 *
 	 */
 	protected void generateTestData(StringBuilder builder, float[] testData) {
+		
 		Random rand = new Random();
 		int maxRand = 1000;
-		testData[0] = rand.nextInt(maxRand) + 1;
-		testData[1] = rand.nextInt(maxRand) + 1;
-		testData[2] = rand.nextInt(maxRand) + 1;
-
 		int triang = 0;
-		ExePath.clear();
-		startBranches();
-		List<Condition> currentPath = ExePath.get(iterationExePath);
-		for (int i = 0; i < currentPath.size(); i++) {
-			testData = calculateTestDataByCondition(currentPath.get(i), testData, triang);
+		
+		testData[0] = rand.nextInt(maxRand)+1;
+		testData[1] = rand.nextInt(maxRand)+1;
+		testData[2] = rand.nextInt(maxRand)+1;
 
-		}
+		paths.clear();
+		startBranches();
+		ExePath exe = paths.get(iterationExePath);
+		
+		//For each condition in the current Path:
+		testData = exe.runPath(testData, triang, fit);
+		//testData = runPath(exe, testData, triang);
+		
 		for (int i = 0; i < testData.length; i++) {
 			builder.append(testData[i]).append(", ");
 		}
@@ -60,8 +65,26 @@ public class SearchBasedTest extends CoverageTest {
 			iterationExePath = 0;
 
 	}
-
-	private float[] calculateTestDataByCondition(Condition condition, float[] testData, int triang) {
+	private float[] runPath(ExePath exe, float[] testData, int triang) {
+		int tri = triang;
+		for(Condition each: exe.getBranches() ){
+			testData = calculateTestDataByCondition(each, testData, tri);
+		}
+		return testData;
+		
+	}
+	/**
+	 * Returns the new testData 
+	 * 
+	 * @param condition
+	 * 
+	 * @param testData
+	 * 
+	 * @param triang
+	 * 
+	 * @return new TestData
+	 */
+	float[] calculateTestDataByCondition(Condition condition, float[] testData, int triang) {
 		int Total = 0;
 		//Condition condition = currentPath.get(i);
 		int a = 0;
@@ -79,7 +102,15 @@ public class SearchBasedTest extends CoverageTest {
 		return testData;
 		
 	}
-
+	/**
+	 * Returns triangFunction
+	 * 
+	 * @param condition
+	 * 
+	 * @param triang
+	 * 
+	 * @return int triang
+	 */
 	private int triangFunction(Condition condition, int triang) {
 
 		int x = 0;
@@ -97,7 +128,17 @@ public class SearchBasedTest extends CoverageTest {
 		}
 		return triang;
 	}
-
+	/**
+	 * updateTestData2
+	 * 
+	 * @param condition
+	 * 
+	 * @param testData
+	 * 
+	 * @param Total
+	 * 
+	 * @return testData
+	 */
 	private float[] updateTestData2(float[] testData, Condition condition, int Total) {
 
 		int j = 0;
@@ -122,7 +163,17 @@ public class SearchBasedTest extends CoverageTest {
 		}
 		return testData;
 	}
-
+	/**
+	 * updateTestData
+	 * 
+	 * @param testData
+	 * 
+	 * @param condition
+	 * 
+	 * @param Total
+	 * 
+	 * @return new float testData
+	 */
 	private float[] updateTestData(float[] testData, Condition condition, int Total) {
 
 		int max = 4;
@@ -154,7 +205,15 @@ public class SearchBasedTest extends CoverageTest {
 		}
 		return testData;
 	}
-
+	/**
+	 * calculateB
+	 * 
+	 * @param testData
+	 * 
+	 * @param condition
+	 * 
+	 * @return returns b
+	 */
 	private int calculateB(Condition condition, float[] testData) {
 		int b = 0;
 		int[] arrayResult = new int[] { (int) testData[0], (int) testData[1], (int) testData[2], 0, 1, 2, 3 };
@@ -165,7 +224,15 @@ public class SearchBasedTest extends CoverageTest {
 
 		return b;
 	}
-
+	/**
+	 * calculateB
+	 * 
+	 * @param testData
+	 * 
+	 * @param condition
+	 * 
+	 * @return returns a
+	 */
 	private int calculateA(Condition condition, float[] testData) {
 		int triang = 0;
 		int a = 0;
@@ -234,11 +301,7 @@ public class SearchBasedTest extends CoverageTest {
 
 	public void startBranches() {
 
-		// Path 1 to 14:
-		for (int i = 1; i < 15; i++) {
-			ExePath.add(createPath(i));
-		}
-
+		paths = ExePath.createExePaths();
 	}
 
 	// Function to create the Paths

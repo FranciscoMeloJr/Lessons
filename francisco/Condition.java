@@ -22,11 +22,12 @@ public class Condition {
 		this.right = v2;
 		this.result = result;
 	}
+
 	/**
 	 * This function creates a Condition from an array
 	 * 
 	 * @param array
-	 * 			information that is in the arrays above
+	 *            information that is in the arrays above
 	 */
 	public static Condition createCondition(int v1, int op, int v2, int res) {
 		return new Condition(arrayVariables[v1], arrayOpt[op], arrayVariables[v2], arrayRes[res]);
@@ -36,15 +37,16 @@ public class Condition {
 	 * This function creates a Condition from an array
 	 * 
 	 * @param array
-	 * 			information that is in the arrays above
+	 *            information that is in the arrays above
 	 */
 	public static Condition createCondition(int[] array) {
 		return new Condition(arrayVariables[array[0]], arrayOpt[array[1]], arrayVariables[array[2]],
 				arrayRes[array[3]]);
 	}
 
-	// All the conditions are described below -although not enhanced, this is much easy to understand:
-	
+	// All the conditions are described below -although not enhanced, this is
+	// much easy to understand:
+
 	static int cond1[] = new int[] { 0, 0, 3, 0 };
 	static int cond2[] = new int[] { 0, 0, 3, 1 };
 	static int cond3[] = new int[] { 1, 0, 3, 0 };
@@ -86,8 +88,7 @@ public class Condition {
 	static int cond40[] = new int[] { 8, 0, 0, 0 };
 	static int cond41[] = new int[] { 0, 0, 2, 1 };
 
-	
-	//the arrays below describe each one of the paths:
+	// the arrays below describe each one of the paths:
 	static int array14[][] = new int[][] { cond1, cond4, cond5, cond7, cond8, cond9, cond11, cond12, cond13, cond15 };
 
 	static int array13[][] = new int[][] { cond2, cond4, cond5, cond6, cond7, cond8, cond9, cond10, cond11, cond12,
@@ -115,54 +116,15 @@ public class Condition {
 	 * This function creates all the paths:
 	 * 
 	 * @param int
-	 * 			The path to be created
+	 *            The path to be created
 	 */
 	static protected List<Condition> createPath(int i) {
 		List<Condition> branches = new ArrayList<Condition>();
+		ExePath ex;
 
-		if (i == 1) {
-			branches = createBranchesList(array1);
-		}
+		ex = new ExePath(i);
+		branches = ex.getBranches();
 
-		if (i == 2) {
-			branches = createBranchesList(array2);
-		}
-		if (i == 3) {
-			branches = createBranchesList(array3);
-		}
-		if (i == 4) {
-			branches = createBranchesList(array4);
-		}
-		if (i == 5) {
-			branches = createBranchesList(array5);
-		}
-		if (i == 6) {
-			branches = createBranchesList(array6);
-		}
-		if (i == 7) {
-			branches = createBranchesList(array7);
-		}
-		if (i == 8) {
-			branches = createBranchesList(array8);
-		}
-		if (i == 9) {
-			branches = createBranchesList(array9);
-		}
-		if (i == 10) {
-			branches = createBranchesList(array10);
-		}
-		if (i == 11) {
-			branches = createBranchesList(array11);
-		}
-		if (i == 12) {
-			branches = createBranchesList(array12);
-		}
-		if (i == 13) {
-			branches = createBranchesList(array13);
-		}
-		if (i == 14) {
-			branches = createBranchesList(array14);
-		}
 		return branches;
 	}
 
@@ -172,7 +134,7 @@ public class Condition {
 	 * @param array
 	 *            Array with the conditions
 	 */
-	static private List<Condition> createBranchesList(int array[][]) {
+	static List<Condition> createBranchesList(int array[][]) {
 		ArrayList<int[]> list = new ArrayList<int[]>();
 
 		for (int each1[] : array) {
