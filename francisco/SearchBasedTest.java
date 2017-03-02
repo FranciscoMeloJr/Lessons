@@ -48,7 +48,6 @@ public class SearchBasedTest extends CoverageTest {
 		testData[1] = rand.nextInt(maxRand)+1;
 		testData[2] = rand.nextInt(maxRand)+1;
 
-		paths.clear();
 		startBranches();
 		ExePath exe = paths.get(iterationExePath);
 		
