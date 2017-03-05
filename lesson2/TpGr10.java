@@ -294,8 +294,7 @@ public class TpGr10 {
                 if (printempsMasc == 0){ 
                     System.out.println( "Pourcentage hommes : 0% ");
                 }else{
-                	float r = (float) printempsMasc / ( (float) printempsMasc +  (float) printempsFem);
-                    System.out.println( "Pourcentage hommes : " + (r) * 100 + " %" );
+                	System.out.println( "Pourcentage hommes : " + ((printempsMasc /  (float) (printempsMasc +  printempsFem))*100) + "% ");
                 }  
                 
                 if (printempsFem == 0) {
