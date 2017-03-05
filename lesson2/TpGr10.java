@@ -401,80 +401,92 @@ public class TpGr10 {
 				Clavier.lireFinLigne();
 				System.out.print("GROUPE D'AGE 1");
 				System.out.println();
-				int total = saisonGru1Pri + saisonGru1Ete + saisonGru1Aut + saisonGru1Hiv;
+				total = saisonGru1Pri + saisonGru1Ete + saisonGru1Aut + saisonGru1Hiv;
+				int r  = 0;
 				System.out.println();
 
 				if (total != 0) {
-					System.out.println("Printemps : " + (saisonGru1Pri / (total)) * 100 + " %");
-					System.out.println("Ete : " + (saisonGru1Ete / (total)) * 100 + " %");
-					System.out.println("Automne : " + (saisonGru1Aut / (total)) * 100 + " %");
-					System.out.println("Hiver : " + (saisonGru1Hiv / (total)) * 100 + " %");
+					r = saisonGru1Pri / total;
 				}
+				System.out.println("Printemps : " + (r) * 100 + " %");
+				System.out.println("Ete : " + (r) * 100 + " %");
+				System.out.println("Automne : " + (r) * 100 + " %");
+				System.out.println("Hiver : " + (r) * 100 + " %");
+				
 				System.out.println();
 
 				System.out.print("Appuyez sur ENTER pour continuer : ");
 				Clavier.lireFinLigne();
-
 				System.out.print("GROUPE D'AGE 2");
+				System.out.println();
 				total = saisonGru2Pri + saisonGru2Ete + saisonGru2Aut + saisonGru2Hiv;
+				r  = 0;
 				System.out.println();
 
 				if (total != 0) {
-					System.out.println("Printemps : " + (saisonGru2Pri / (total)) * 100 + " %");
-					System.out.println("Ete : " + (saisonGru2Ete / (total)) * 100 + " %");
-					System.out.println("Automne : " + (saisonGru2Aut / (total)) * 100 + " %");
-					System.out.println("Hiver : " + (saisonGru2Hiv / (total)) * 100 + " %");
+					r = saisonGru1Pri / total;
 				}
+				System.out.println("Printemps : " + (r) * 100 + " %");
+				System.out.println("Ete : " + (r) * 100 + " %");
+				System.out.println("Automne : " + (r) * 100 + " %");
+				System.out.println("Hiver : " + (r) * 100 + " %");
 
 				System.out.println();
 
 				System.out.print("Appuyez sur ENTER pour continuer : ");
 				Clavier.lireFinLigne();
-
 				System.out.print("GROUPE D'AGE 3");
 				System.out.println();
 				total = saisonGru3Pri + saisonGru3Ete + saisonGru3Aut + saisonGru3Hiv;
+				r  = 0;
 				System.out.println();
 
 				if (total != 0) {
-					System.out.println("Printemps : " + (saisonGru3Pri / (total)) * 100 + " %");
-					System.out.println("Ete : " + (saisonGru3Ete / (total)) * 100 + " %");
-					System.out.println("Automne : " + (saisonGru3Aut / (total)) * 100 + " %");
-					System.out.println("Hiver : " + (saisonGru3Hiv / (total)) * 100 + " %");
+					r = saisonGru1Pri / total;
 				}
+				System.out.println("Printemps : " + (r) * 100 + " %");
+				System.out.println("Ete : " + (r) * 100 + " %");
+				System.out.println("Automne : " + (r) * 100 + " %");
+				System.out.println("Hiver : " + (r) * 100 + " %");
+
 				System.out.println();
 
 				System.out.print("Appuyez sur ENTER pour continuer : ");
 				Clavier.lireFinLigne();
-
 				System.out.print("GROUPE D'AGE 4");
 				System.out.println();
 				total = saisonGru4Pri + saisonGru4Ete + saisonGru4Aut + saisonGru4Hiv;
+				r  = 0;
 				System.out.println();
 
 				if (total != 0) {
-					System.out.println("Printemps : " + (saisonGru4Pri / (total)) * 100 + " %");
-					System.out.println("Ete : " + (saisonGru4Ete / (total)) * 100 + " %");
-					System.out.println("Automne : " + (saisonGru4Aut / (total)) * 100 + " %");
-					System.out.println("Hiver : " + (saisonGru4Hiv / (total)) * 100 + " %");
+					r = saisonGru1Pri / total;
 				}
+				System.out.println("Printemps : " + (r) * 100 + " %");
+				System.out.println("Ete : " + (r) * 100 + " %");
+				System.out.println("Automne : " + (r) * 100 + " %");
+				System.out.println("Hiver : " + (r) * 100 + " %");
 
 				System.out.println();
 
+				
 				System.out.print("Appuyez sur ENTER pour continuer : ");
 				Clavier.lireFinLigne();
-
 				System.out.print("GROUPE D'AGE 5");
 				System.out.println();
 				total = saisonGru5Pri + saisonGru5Ete + saisonGru5Aut + saisonGru5Hiv;
+				r  = 0;
 				System.out.println();
 
 				if (total != 0) {
-					System.out.println("Printemps : " + (saisonGru5Pri / (total)) * 100 + " %");
-					System.out.println("Ete : " + (saisonGru5Ete / (total)) * 100 + " %");
-					System.out.println("Automne : " + (saisonGru5Aut / (total)) * 100 + " %");
-					System.out.println("Hiver : " + (saisonGru5Hiv / (total)) * 100 + " %");
+					r = saisonGru1Pri / total;
 				}
+				System.out.println("Printemps : " + (r) * 100 + " %");
+				System.out.println("Ete : " + (r) * 100 + " %");
+				System.out.println("Automne : " + (r) * 100 + " %");
+				System.out.println("Hiver : " + (r) * 100 + " %");
+
+				System.out.println();
 			}
 
 		}
