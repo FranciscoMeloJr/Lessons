@@ -402,39 +402,16 @@ public class TpGr10 {
 
 				System.out.print("Appuyez sur ENTER pour continuer : ");
 				Clavier.lireFinLigne();
-
 				System.out.print("GROUPE D'AGE 1");
 				System.out.println();
-				if (saisonGru1Pri == 0) {
-					System.out.println("Pourcentage printemps : 0% ");
-				} else {
-					System.out.println("Printemps : "
-							+ (saisonGru1Pri / (saisonGru1Pri + saisonGru1Ete + saisonGru1Aut + saisonGru1Hiv)) * 100
-							+ " %");
-				}
+				int total = saisonGru1Pri + saisonGru1Ete + saisonGru1Aut + saisonGru1Hiv;
+				System.out.println();
 
-				if (saisonGru1Ete == 0) {
-					System.out.println("Pourcentage ete : 0% ");
-				} else {
-					System.out.println("Ete : "
-							+ (saisonGru1Ete / (saisonGru1Pri + saisonGru1Ete + saisonGru1Aut + saisonGru1Hiv)) * 100
-							+ " %");
-				}
-
-				if (saisonGru1Aut == 0) {
-					System.out.println("Pourcentage automne : 0% ");
-				} else {
-					System.out.println("Automne : "
-							+ (saisonGru1Aut / (saisonGru1Pri + saisonGru1Ete + saisonGru1Aut + saisonGru1Hiv)) * 100
-							+ " %");
-				}
-
-				if (saisonGru1Hiv == 0) {
-					System.out.println("Pourcentage hiver : 0% ");
-				} else {
-					System.out.println("Hiver : "
-							+ (saisonGru1Hiv / (saisonGru1Pri + saisonGru1Ete + saisonGru1Aut + saisonGru1Hiv)) * 100
-							+ " %");
+				if (total != 0){
+					System.out.println("Printemps : "+ (saisonGru1Pri / (total)) * 100 + " %");
+					System.out.println("Ete : " + (saisonGru1Ete / (total)) * 100 + " %");
+					System.out.println("Automne : " + (saisonGru1Aut / (total)) * 100 + " %");
+					System.out.println("Hiver : " + (saisonGru1Hiv / (total)) * 100 + " %");
 				}
 				System.out.println();
 
@@ -442,38 +419,16 @@ public class TpGr10 {
 				Clavier.lireFinLigne();
 
 				System.out.print("GROUPE D'AGE 2");
+				total = saisonGru2Pri + saisonGru2Ete + saisonGru2Aut + saisonGru2Hiv;
 				System.out.println();
-				if (saisonGru2Pri == 0) {
-					System.out.println("Pourcentage printemps : 0% ");
-				} else {
-					System.out.println("Printemps : "
-							+ (saisonGru2Pri / (saisonGru2Pri + saisonGru2Ete + saisonGru2Aut + saisonGru2Hiv)) * 100
-							+ " %");
-				}
 
-				if (saisonGru2Ete == 0) {
-					System.out.println("Pourcentage ete : 0% ");
-				} else {
-					System.out.println("Ete : "
-							+ (saisonGru2Ete / (saisonGru2Pri + saisonGru2Ete + saisonGru2Aut + saisonGru2Hiv)) * 100
-							+ " %");
+				if (total != 0){
+					System.out.println("Printemps : "+ (saisonGru2Pri / (total)) * 100 + " %");
+					System.out.println("Ete : " + (saisonGru2Ete / (total)) * 100 + " %");
+					System.out.println("Automne : " + (saisonGru2Aut / (total)) * 100 + " %");
+					System.out.println("Hiver : " + (saisonGru2Hiv / (total)) * 100 + " %");
 				}
-
-				if (saisonGru2Aut == 0) {
-					System.out.println("Pourcentage automne : 0% ");
-				} else {
-					System.out.println("Automne : "
-							+ (saisonGru2Aut / (saisonGru2Pri + saisonGru2Ete + saisonGru2Aut + saisonGru2Hiv)) * 100
-							+ " %");
-				}
-
-				if (saisonGru2Hiv == 0) {
-					System.out.println("Pourcentage hiver : 0% ");
-				} else {
-					System.out.println("Hiver : "
-							+ (saisonGru2Hiv / (saisonGru2Pri + saisonGru2Ete + saisonGru2Aut + saisonGru2Hiv)) * 100
-							+ " %");
-				}
+				
 				System.out.println();
 
 				System.out.print("Appuyez sur ENTER pour continuer : ");
@@ -481,36 +436,14 @@ public class TpGr10 {
 
 				System.out.print("GROUPE D'AGE 3");
 				System.out.println();
-				if (saisonGru3Pri == 0) {
-					System.out.println("Pourcentage printemps : 0% ");
-				} else {
-					System.out.println("Printemps :"
-							+ (saisonGru3Pri / (saisonGru3Pri + saisonGru3Ete + saisonGru3Aut + saisonGru3Hiv)) * 100
-							+ " %");
-				}
+				total = saisonGru3Pri + saisonGru3Ete + saisonGru3Aut + saisonGru3Hiv;
+				System.out.println();
 
-				if (saisonGru3Ete == 0) {
-					System.out.println("Pourcentage ete : 0% ");
-				} else {
-					System.out.println("Ete : "
-							+ (saisonGru3Ete / (saisonGru3Pri + saisonGru3Ete + saisonGru3Aut + saisonGru3Hiv)) * 100
-							+ " %");
-				}
-
-				if (saisonGru3Aut == 0) {
-					System.out.println("Pourcentage automne : 0% ");
-				} else {
-					System.out.println("Automne : "
-							+ (saisonGru3Aut / (saisonGru3Pri + saisonGru3Ete + saisonGru3Aut + saisonGru3Hiv)) * 100
-							+ " %");
-				}
-
-				if (saisonGru3Hiv == 0) {
-					System.out.println("Pourcentage hiver : 0% ");
-				} else {
-					System.out.println("Hiver : "
-							+ (saisonGru3Hiv / (saisonGru3Pri + saisonGru3Ete + saisonGru3Aut + saisonGru3Hiv)) * 100
-							+ " %");
+				if (total != 0){
+					System.out.println("Printemps : "+ (saisonGru3Pri / (total)) * 100 + " %");
+					System.out.println("Ete : " + (saisonGru3Ete / (total)) * 100 + " %");
+					System.out.println("Automne : " + (saisonGru3Aut / (total)) * 100 + " %");
+					System.out.println("Hiver : " + (saisonGru3Hiv / (total)) * 100 + " %");
 				}
 				System.out.println();
 
@@ -519,37 +452,16 @@ public class TpGr10 {
 
 				System.out.print("GROUPE D'AGE 4");
 				System.out.println();
-				if (saisonGru4Pri == 0) {
-					System.out.println("Pourcentage printemps : 0% ");
-				} else {
-					System.out.println("Printemps : "
-							+ (saisonGru4Pri / (saisonGru4Pri + saisonGru4Ete + saisonGru4Aut + saisonGru4Hiv)) * 100
-							+ " %");
-				}
+				total = saisonGru4Pri + saisonGru4Ete + saisonGru4Aut + saisonGru4Hiv;
+				System.out.println();
 
-				if (saisonGru4Ete == 0) {
-					System.out.println("Pourcentage ete : 0% ");
-				} else {
-					System.out.println("Ete : "
-							+ (saisonGru4Ete / (saisonGru4Pri + saisonGru4Ete + saisonGru4Aut + saisonGru4Hiv)) * 100
-							+ " %");
+				if (total != 0){
+					System.out.println("Printemps : "+ (saisonGru4Pri / (total)) * 100 + " %");
+					System.out.println("Ete : " + (saisonGru4Ete / (total)) * 100 + " %");
+					System.out.println("Automne : " + (saisonGru4Aut / (total)) * 100 + " %");
+					System.out.println("Hiver : " + (saisonGru4Hiv / (total)) * 100 + " %");
 				}
-
-				if (saisonGru4Aut == 0) {
-					System.out.println("Pourcentage automne : 0% ");
-				} else {
-					System.out.println("Automne: "
-							+ (saisonGru4Aut / (saisonGru4Pri + saisonGru4Ete + saisonGru4Aut + saisonGru4Hiv)) * 100
-							+ " %");
-				}
-
-				if (saisonGru4Hiv == 0) {
-					System.out.println("Pourcentage hiver : 0% ");
-				} else {
-					System.out.println("Hiver : "
-							+ (saisonGru4Hiv / (saisonGru4Pri + saisonGru4Ete + saisonGru4Aut + saisonGru4Hiv)) * 100
-							+ " %");
-				}
+				
 				System.out.println();
 
 				System.out.print("Appuyez sur ENTER pour continuer : ");
@@ -557,36 +469,14 @@ public class TpGr10 {
 
 				System.out.print("GROUPE D'AGE 5");
 				System.out.println();
-				if (saisonGru5Pri == 0) {
-					System.out.println("Pourcentage printemps : 0% ");
-				} else {
-					System.out.println("Printemps : "
-							+ (saisonGru5Pri / (saisonGru5Pri + saisonGru5Ete + saisonGru5Aut + saisonGru5Hiv)) * 100
-							+ " %");
-				}
+				total = saisonGru5Pri + saisonGru5Ete + saisonGru5Aut + saisonGru5Hiv;
+				System.out.println();
 
-				if (saisonGru5Ete == 0) {
-					System.out.println("Pourcentage ete : 0% ");
-				} else {
-					System.out.println("Ete : "
-							+ (saisonGru5Ete / (saisonGru5Pri + saisonGru5Ete + saisonGru5Aut + saisonGru5Hiv)) * 100
-							+ " %");
-				}
-
-				if (saisonGru5Aut == 0) {
-					System.out.println("Pourcentage automne : 0% ");
-				} else {
-					System.out.println("Automne : "
-							+ (saisonGru5Aut / (saisonGru5Pri + saisonGru5Ete + saisonGru5Aut + saisonGru5Hiv)) * 100
-							+ " %");
-				}
-
-				if (saisonGru5Hiv == 0) {
-					System.out.println("Pourcentage hiver : 0% ");
-				} else {
-					System.out.println("Hiver : "
-							+ (saisonGru5Hiv / (saisonGru5Pri + saisonGru5Ete + saisonGru5Aut + saisonGru5Hiv)) * 100
-							+ " %");
+				if (total != 0){
+					System.out.println("Printemps : "+ (saisonGru5Pri / (total)) * 100 + " %");
+					System.out.println("Ete : " + (saisonGru5Ete / (total)) * 100 + " %");
+					System.out.println("Automne : " + (saisonGru5Aut / (total)) * 100 + " %");
+					System.out.println("Hiver : " + (saisonGru5Hiv / (total)) * 100 + " %");
 				}
 			}
 
